@@ -1,0 +1,118 @@
+/* Write your CSS here */
+.outer-cont {
+  height: 900px;
+
+  border: 2px solid gray;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bg-color {
+  height: 800px;
+  width: 1200px;
+  border: 5px solid gray;
+
+  background-image: linear-gradient(to left, #cffcf1, #defafe);
+  margin-top: 20px;
+}
+
+.heading {
+  font-family: 'Roboto';
+  text-align: center;
+  margin-top: 40px;
+}
+.size {
+  height: 300px;
+  width: 360px;
+}
+.arrange {
+  margin: 30px;
+  height: 600px;
+  width: 1100px;
+  border: 1px solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.bg {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
+  height: 600px;
+  width: 600px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-display {
+  height: 200px;
+  width: 230px;
+  border: 1px solid;
+  border-radius: 200px;
+  margin-left: 180px;
+  margin-top: 90px;
+  background-color: #ffffff;
+  padding: 60px;
+}
+.set {
+  margin-top: 100px;
+}
+.button-section {
+  height: 90px;
+  width: 130px;
+  margin-top: 100px;
+  border: 0px;
+  background-color: transparent;
+}
+.start-imge {
+  height: 50px;
+  margin-top: 30px;
+}
+.row-arr {
+  display: flex;
+}
+.par-start {
+  font-family: 'Roboto';
+  margin-top: 39px;
+  font-size: 20px;
+  margin-left: 10px;
+}
+.head {
+  font-size: 15px;
+  text-align: center;
+  font-family: 'Roboto';
+}
+
+.minu-color {
+  height: 40px;
+  width: 50px;
+  color: #0f172a;
+  border: 0px;
+  background-color: transparent;
+  font-size: 30px;
+}
+.num-size {
+  height: 60px;
+  width: 60px;
+  background-image: linear-gradient(to right, lightgreen, #defafe);
+  color: #0f172a;
+  font-size: 20px;
+  border-radius: 10px;
+}
+.btn-section {
+  display: flex;
+  justify-content: center;
+}
+.time {
+  font-size: 25px;
+  font-weight: bold;
+  color: #00d9f5;
+}
+
+.textdis {
+  font-family: 'Roboto';
+  font-weight: 600;
+  color: #0f172a;
+}
