@@ -12,11 +12,11 @@ class DigitalTimer extends Component {
     seconds: 60,
   }
 
-  /* decminute = () => {
+  /*decminute = () => {
     this.setState(prve => {
       prve.initialtime - 1
     })
-  } */
+  }*/
 
   componentWillUnmount() {
     this.clear()
@@ -87,7 +87,7 @@ class DigitalTimer extends Component {
     this.ondecreaseinMinutes()
     this.setState({
       starttime: false,
-      seconds,
+      seconds: seconds,
       timerStart: false,
       initialdefaulttimer: false,
     })
@@ -107,86 +107,86 @@ class DigitalTimer extends Component {
     const text = starttime ? 'Paused' : 'Running'
 
     return (
-      <div className="outer-cont">
-        <div className="bg-color">
-          <h1 className="heading">Digital Timer</h1>
-          <div className="arrange">
-            <div className="bg">
-              <div className="timer-display">
-                <h1 className="time">{c}</h1>
+      <div className='outer-cont'>
+        <div className='bg-color'>
+          <h1 className='heading'>Digital Timer</h1>
+          <div className='arrange'>
+            <div className='bg'>
+              <div className='timer-display'>
+                <h1 className='time'>{c}</h1>
 
-                <p className="textdis">{text}</p>
+                <p className='textdis'>{text}</p>
               </div>
             </div>
-            <div className="set">
+            <div className='set'>
               <div>
                 {starttime ? (
                   <>
                     <button
-                      className="button-section"
-                      type="button"
+                      className='button-section'
+                      type='button'
                       onClick={this.changeIcon}
                     >
-                      <div className="row-arr">
+                      <div className='row-arr'>
                         <img
-                          src="https://assets.ccbp.in/frontend/react-js/play-icon-img.png"
-                          className="start-imge"
-                          alt="play icon"
+                          src='https://assets.ccbp.in/frontend/react-js/play-icon-img.png'
+                          className='start-imge'
+                          alt='play icon'
                         />
-                        <p className="par-start">start</p>
+                        <p className='par-start'>start</p>
                       </div>
                     </button>
                   </>
                 ) : (
                   <>
                     <button
-                      className="button-section"
-                      type="button"
+                      className='button-section'
+                      type='button'
                       onClick={this.onclickpause}
                     >
-                      <div className="row-arr">
+                      <div className='row-arr'>
                         <img
-                          src="https://assets.ccbp.in/frontend/react-js/pause-icon-img.png"
-                          className="start-imge"
-                          alt="pause icon"
+                          src='https://assets.ccbp.in/frontend/react-js/pause-icon-img.png'
+                          className='start-imge'
+                          alt='pause icon'
                         />
-                        <p className="par-start">Pause</p>
+                        <p className='par-start'>Pause</p>
                       </div>
                     </button>
                   </>
                 )}
                 <button
-                  className="button-section"
-                  type="button"
+                  className='button-section'
+                  type='button'
                   onClick={this.resettime}
                 >
-                  <div className="row-arr">
+                  <div className='row-arr'>
                     <img
-                      src="https://assets.ccbp.in/frontend/react-js/reset-icon-img.png "
-                      className="start-imge"
-                      alt="reset icon"
+                      src='https://assets.ccbp.in/frontend/react-js/reset-icon-img.png '
+                      className='start-imge'
+                      alt='reset icon'
                     />
-                    <p className="par-start">Reset</p>
+                    <p className='par-start'>Reset</p>
                   </div>
                 </button>
               </div>
-              <div className="settimelimit-sec">
-                <p className="head">Set Timer Limit</p>
+              <div className='settimelimit-sec'>
+                <p className='head'>Set Timer Limit</p>
 
-                <div className="btn-section">
+                <div className='btn-section'>
                   <button
-                    type="button"
-                    className="minu-color"
+                    type='button'
+                    className='minu-color'
                     onClick={this.decrementfunc}
                   >
                     -
                   </button>
-                  <button type="button" className="num-size">
+                  <button type='button' className='num-size'>
                     <p>{initialtime}</p>
                   </button>
                   <button
-                    type="button"
-                    className="minu-color"
+                    type='button'
+                    className='minu-color'
                     onClick={this.incrementfunc}
                   >
                     +
