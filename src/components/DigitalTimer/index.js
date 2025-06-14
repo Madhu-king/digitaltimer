@@ -9,7 +9,7 @@ class DigitalTimer extends Component {
     timerStart: true,
     initialdefaulttimer: true,
 
-    seconds: 60,
+    seconds: 0, // 60//
   }
 
   componentWillUnmount() {
@@ -24,13 +24,13 @@ class DigitalTimer extends Component {
     const {initialtime, seconds} = this.state
 
     let sec = 0
-    sec += seconds - 1
+    sec += seconds - 1 // seconds
     if (sec === 0) {
-      this.setState({initialtime: initialtime - 1, seconds: 60})
+      this.setState({initialtime: initialtime - 1, seconds: 59})
     } else if (sec < 0) {
-      this.setState({seconds: 60})
+      this.setState({seconds: 59})
     } else if (sec < 10) {
-      this.setState({seconds: `0+${sec}`})
+      this.setState({seconds: `0${sec}`})
     } else {
       this.setState({seconds: sec})
     }
@@ -51,11 +51,9 @@ class DigitalTimer extends Component {
     } else {
       time += initialtime + 1
 
-      this.setState({initialtime: time})
+      this.setState({initialtime: time, seconds: 59})
     }
   }
-
-  // set time limit decrease minutes//
 
   decrementfunc = () => {
     const {initialtime, timerStart} = this.state
@@ -73,11 +71,17 @@ class DigitalTimer extends Component {
   resettime = () => {
     clearInterval(this.timerId)
 
-    this.setState({initialtime: 25, seconds: '00', timerStart: true})
+    this.setState({
+      initialtime: 25,
+      seconds: 0,
+      timerStart: true,
+      initialdefaulttimer: true,
+    }) // '00'
   }
 
   changeIcon = () => {
     const {seconds} = this.state
+
     this.ondecreaseinMinutes()
     this.setState({
       starttime: false,
@@ -88,7 +92,8 @@ class DigitalTimer extends Component {
   }
 
   onclickpause = () => {
-    this.setState({starttime: true})
+    const {seconds} = this.state
+    this.setState({starttime: true, seconds})
     this.clear()
   }
 
