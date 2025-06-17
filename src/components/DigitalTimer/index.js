@@ -7,7 +7,6 @@ class DigitalTimer extends Component {
     initialtime: 25,
     starttime: true,
     timerStart: true,
-    initialdefaulttimer: true,
 
     seconds: 0, // 60//
   }
@@ -75,7 +74,6 @@ class DigitalTimer extends Component {
       initialtime: 25,
       seconds: 0,
       timerStart: true,
-      initialdefaulttimer: true,
     }) // '00'
   }
 
@@ -87,7 +85,6 @@ class DigitalTimer extends Component {
       starttime: false,
       seconds,
       timerStart: false,
-      initialdefaulttimer: false,
     })
   }
 
@@ -97,12 +94,21 @@ class DigitalTimer extends Component {
     this.clear()
   }
 
-  render() {
-    const {initialtime, starttime, seconds, initialdefaulttimer} = this.state
+  formatTime = (minutes, seconds) => {
+    const paddedMinutes = String(minutes).padStart(2, '0')
+    const paddedSeconds = String(seconds).padStart(2, '0')
+    return `${paddedMinutes}:${paddedSeconds}`
+  }
 
-    const c = initialdefaulttimer
+  render() {
+    const {initialtime, starttime, seconds} = this.state
+
+    const displayTime = this.formatTime(initialtime, seconds)
+
+    /* const c = initialdefaulttimer
       ? `${initialtime}:00`
-      : `${initialtime}:${seconds}`
+      : displayTime            //`${initialtime}:${seconds}`//
+      */
     const text = starttime ? 'Paused' : 'Running'
 
     return (
@@ -112,8 +118,7 @@ class DigitalTimer extends Component {
           <div className="arrange">
             <div className="bg">
               <div className="timer-display">
-                <h1 className="time">{c}</h1>
-
+                <h1 className="time">{displayTime}</h1>
                 <p className="textdis">{text}</p>
               </div>
             </div>
