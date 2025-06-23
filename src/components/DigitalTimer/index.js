@@ -5,65 +5,48 @@ import './index.css'
 class DigitalTimer extends Component {
   state = {
     initialtime: 25,
-    starttime: true,
-    timerStart: true,
+    /* starttime: true,
+    timerStart: true, */
+    timerRunning: false,
 
     seconds: 0, // 60//
   }
 
   componentWillUnmount() {
-    this.clear()
-  }
-
-  clear = () => {
     clearInterval(this.timerId)
   }
 
   secondsupdate = () => {
-    const {initialtime, seconds} = this.state
-
-    let sec = 0
-    sec += seconds - 1 // seconds
-    if (sec === 0) {
-      this.setState({initialtime: initialtime - 1, seconds: 59})
-    } else if (sec < 0) {
-      this.setState({seconds: 59})
-    } else if (sec < 10) {
-      this.setState({seconds: `0${sec}`})
-    } else {
-      this.setState({seconds: sec})
-    }
+    this.setState(prevState => {
+      const {initialtime, seconds} = prevState
+      if (initialtime === 0 && seconds === 0) {
+        clearInterval(this.timerId)
+        return {initialtime: 0, seconds: 0, timerRunning: false}
+      }
+      if (seconds === 0) {
+        return {initialtime: initialtime - 1, seconds: 59}
+      }
+      return {seconds: seconds - 1}
+    })
   }
 
-  ondecreaseinMinutes = () => {
+  /* ondecreaseinMinutes = () => {
     this.timerId = setInterval(() => {
       this.secondsupdate()
     }, 1000)
-  }
+  } */
 
   incrementfunc = () => {
-    const {initialtime, timerStart} = this.state
-    let time = 0
-    if (timerStart === false) {
-      console.log('notimer set')
-      time += initialtime
-    } else {
-      time += initialtime + 1
-
-      this.setState({initialtime: time, seconds: 59})
+    const {timerRunning, initialtime} = this.state
+    if (!timerRunning) {
+      this.setState(prevState => ({initialtime: prevState.initialtime + 1}))
     }
   }
 
   decrementfunc = () => {
-    const {initialtime, timerStart} = this.state
-
-    let time = 0
-    if (timerStart === false) {
-      time += initialtime
-    } else {
-      time += initialtime - 1
-
-      this.setState({initialtime: time})
+    const {timerRunning, initialtime} = this.state
+    if (!timerRunning && initialtime > 1) {
+      this.setState(prevState => ({initialtime: prevState.initialtime - 1}))
     }
   }
 
@@ -73,25 +56,20 @@ class DigitalTimer extends Component {
     this.setState({
       initialtime: 25,
       seconds: 0,
-      timerStart: true,
+      timerRunning: false,
     }) // '00'
   }
 
-  changeIcon = () => {
-    const {seconds} = this.state
-
-    this.ondecreaseinMinutes()
+  starttimer = () => {
+    this.timerId = setInterval(this.secondsupdate, 1000)
     this.setState({
-      starttime: false,
-      seconds,
-      timerStart: false,
+      timerRunning: true,
     })
   }
 
   onclickpause = () => {
-    const {seconds} = this.state
-    this.setState({starttime: true, seconds})
-    this.clear()
+    clearInterval(this.timerId)
+    this.setState({timerRunning: false})
   }
 
   formatTime = (minutes, seconds) => {
@@ -101,7 +79,7 @@ class DigitalTimer extends Component {
   }
 
   render() {
-    const {initialtime, starttime, seconds} = this.state
+    const {initialtime, timerRunning, seconds} = this.state
 
     const displayTime = this.formatTime(initialtime, seconds)
 
@@ -109,7 +87,7 @@ class DigitalTimer extends Component {
       ? `${initialtime}:00`
       : displayTime            //`${initialtime}:${seconds}`//
       */
-    const text = starttime ? 'Paused' : 'Running'
+    const text = timerRunning ? 'Running' : 'Paused'
 
     return (
       <div className="outer-cont">
@@ -124,24 +102,7 @@ class DigitalTimer extends Component {
             </div>
             <div className="set">
               <div>
-                {starttime ? (
-                  <>
-                    <button
-                      className="button-section"
-                      type="button"
-                      onClick={this.changeIcon}
-                    >
-                      <div className="row-arr">
-                        <img
-                          src="https://assets.ccbp.in/frontend/react-js/play-icon-img.png"
-                          className="start-imge"
-                          alt="play icon"
-                        />
-                        <p className="par-start">start</p>
-                      </div>
-                    </button>
-                  </>
-                ) : (
+                {timerRunning ? (
                   <>
                     <button
                       className="button-section"
@@ -155,6 +116,23 @@ class DigitalTimer extends Component {
                           alt="pause icon"
                         />
                         <p className="par-start">Pause</p>
+                      </div>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="button-section"
+                      type="button"
+                      onClick={this.starttimer}
+                    >
+                      <div className="row-arr">
+                        <img
+                          src="https://assets.ccbp.in/frontend/react-js/play-icon-img.png"
+                          className="start-imge"
+                          alt="play icon"
+                        />
+                        <p className="par-start">Start</p>
                       </div>
                     </button>
                   </>
@@ -174,24 +152,29 @@ class DigitalTimer extends Component {
                   </div>
                 </button>
               </div>
+
               <div className="settimelimit-sec">
                 <p className="head">Set Timer Limit</p>
 
                 <div className="btn-section">
                   <button
+                    onClick={this.decrementfunc}
+                    disabled={timerRunning}
                     type="button"
                     className="minu-color"
-                    onClick={this.decrementfunc}
                   >
                     -
                   </button>
+
                   <button type="button" className="num-size">
                     <p>{initialtime}</p>
                   </button>
+
                   <button
+                    onClick={this.incrementfunc}
+                    disabled={timerRunning}
                     type="button"
                     className="minu-color"
-                    onClick={this.incrementfunc}
                   >
                     +
                   </button>
