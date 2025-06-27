@@ -8,6 +8,7 @@ class DigitalTimer extends Component {
     /* starttime: true,
     timerStart: true, */
     timerRunning: false,
+    displayTimeinitial: 25,
 
     seconds: 0, // 60//
   }
@@ -18,13 +19,14 @@ class DigitalTimer extends Component {
 
   secondsupdate = () => {
     this.setState(prevState => {
-      const {initialtime, seconds} = prevState
-      if (initialtime === 0 && seconds === 0) {
+      const {initialtime, seconds, displayTimeinitial} = prevState
+
+      if (displayTimeinitial === 0 && seconds === 0) {
         clearInterval(this.timerId)
-        return {initialtime: 0, seconds: 0, timerRunning: false}
+        return {displayTimeinitial: 0, seconds: 0, timerRunning: false}
       }
       if (seconds === 0) {
-        return {initialtime: initialtime - 1, seconds: 59}
+        return {displayTimeinitial: displayTimeinitial - 1, seconds: 59}
       }
       return {seconds: seconds - 1}
     })
@@ -37,16 +39,27 @@ class DigitalTimer extends Component {
   } */
 
   incrementfunc = () => {
-    const {timerRunning, initialtime} = this.state
+    const {timerRunning} = this.state
+
     if (!timerRunning) {
-      this.setState(prevState => ({initialtime: prevState.initialtime + 1}))
+      /* this.setState(prevState => ({initialtime: prevState.initialtime + 1})) */
+
+      this.setState(prevState => {
+        const {initialtime, displayTimeinitial} = prevState
+        return {
+          initialtime: initialtime + 1,
+          displayTimeinitial: displayTimeinitial + 1,
+        }
+      })
     }
   }
 
   decrementfunc = () => {
-    const {timerRunning, initialtime} = this.state
+    const {timerRunning, initialtime, displayTimeinitial} = this.state
     if (!timerRunning && initialtime > 1) {
-      this.setState(prevState => ({initialtime: prevState.initialtime - 1}))
+      this.setState(prevState => ({
+        displayTimeinitial: prevState.displayTimeinitial - 1,
+      }))
     }
   }
 
@@ -54,7 +67,7 @@ class DigitalTimer extends Component {
     clearInterval(this.timerId)
 
     this.setState({
-      initialtime: 25,
+      displayTimeinitial: 25,
       seconds: 0,
       timerRunning: false,
     }) // '00'
@@ -79,16 +92,11 @@ class DigitalTimer extends Component {
   }
 
   render() {
-    const {initialtime, timerRunning, seconds} = this.state
+    const {initialtime, timerRunning, seconds, displayTimeinitial} = this.state
 
-    const displayTime = this.formatTime(initialtime, seconds)
+    const displayTime = this.formatTime(displayTimeinitial, seconds) // initiltime//
 
-    /* const c = initialdefaulttimer
-      ? `${initialtime}:00`
-      : displayTime            //`${initialtime}:${seconds}`//
-      */
     const text = timerRunning ? 'Running' : 'Paused'
-
     return (
       <div className="outer-cont">
         <div className="bg-color">
@@ -101,7 +109,7 @@ class DigitalTimer extends Component {
               </div>
             </div>
             <div className="set">
-              <div>
+              <div className="smll">
                 {timerRunning ? (
                   <>
                     <button

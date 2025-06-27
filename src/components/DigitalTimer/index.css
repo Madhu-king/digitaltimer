@@ -2,7 +2,7 @@
 .outer-cont {
   height: 900px;
 
-  border: 2px solid gray;
+  border: 0px solid gray;
 
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
 .bg-color {
   height: 800px;
   width: 1200px;
-  border: 5px solid gray;
+  border: 0px solid gray;
 
   background-image: linear-gradient(to left, #cffcf1, #defafe);
   margin-top: 20px;
@@ -30,7 +30,7 @@
   margin: 30px;
   height: 600px;
   width: 1100px;
-  border: 1px solid;
+  border: 0px solid;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -49,7 +49,7 @@
 .timer-display {
   height: 200px;
   width: 230px;
-  border: 1px solid;
+  border: 0px solid;
   border-radius: 200px;
   margin-left: 180px;
   margin-top: 90px;
@@ -115,4 +115,70 @@
   font-family: 'Roboto';
   font-weight: 600;
   color: #0f172a;
+}
+
+@media screen and (max-width: 576px) {
+  .outer-cont {
+    height: 1000px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+  }
+  .bg-color {
+    height: 1000px;
+    width: 300px;
+    border: 0px solid gray;
+    margin-top: 10px;
+  }
+  .heading {
+    margin-top: 10px;
+  }
+  .arrange {
+    height: 600px;
+    width: 260px;
+    border: 0px solid green;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+  }
+  .bg {
+    height: 300px;
+    width: 300px;
+    border-radius: 300px;
+    margin-right: 40px;
+
+    background-size: cover;
+
+    /* display: flex;
+    flex-direction: column;*/
+
+    margin-top: 0px;
+  }
+  .timer-display {
+    height: 100px;
+    width: 120px;
+    border-radius: 150px;
+    padding: 10px;
+    margin-left: 60px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .smll {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  .button-section {
+    margin-top: 2px;
+  }
+
+  .settimelimit-sec {
+    margin-bottom: 330px;
+  }
 }
